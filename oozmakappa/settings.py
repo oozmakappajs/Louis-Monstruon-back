@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hello",
+    "payments.apps.PaymentsConfig",
 ]
 
 MIDDLEWARE = [
@@ -57,7 +57,7 @@ ROOT_URLCONF = "oozmakappa.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": ['templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -116,4 +116,8 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = "/static/"
 
+#Stripe implementation 
+
+STRIPE_SECRET_KEY = 'sk_test_BrfSmzFzl0qGgw9lEanHW8jO00ygVeJVoJ'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_vjxxCOJCrunipQUFI1qK662L00X9alzQIv'
 
