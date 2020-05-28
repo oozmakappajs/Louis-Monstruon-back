@@ -1,5 +1,6 @@
 from django.test import TestCase
-from .models import Dress
+from .models import Products
+
 
 class ProductTest(TestCase):
 
@@ -11,8 +12,8 @@ class ProductTest(TestCase):
         }
 
     def test_output(self):
-        output_answer = Dress(self.parameters['marca'], self.parameters['size'], self.parameters['color'])
-        self.assertEqual = (output_answer, 'Monstruon', 'small', 'pink') 
-        
+        output_answer = Products(self.parameters['marca'], self.parameters['size'], self.parameters['color'])
+        self.assertEqual = (output_answer, 'Monstruon', 'small', 'pink')
+
     def tearDown(self):
-            del(self.parameters)
+        del self.parameters
