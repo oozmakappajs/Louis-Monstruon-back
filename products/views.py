@@ -3,6 +3,9 @@ import json
 
 from django.http import HttpResponse
 from rest_framework import viewsets
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
 
 from .models import Products
 from .serializers import ProductsSerializer
@@ -37,3 +40,56 @@ def oneProduct(request, id):
     }
 
     return HttpResponse(json.dumps(data, indent=4), content_type='application/json')
+
+
+@api_view(['GET', 'DELETE', 'PUT'])
+def get_delete_update_product(request, pk):
+    try:
+        product = Products.objects.get(pk=pk)
+    except Products.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    # get details of a single product
+    if request.method == 'GET':
+        serializer = ProductsSerializer(product)
+        return Response(serializer.data)
+    # delete a single product
+    if request.method == 'DELETE':
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    # update details of a single product
+    if request.method == 'PUT':
+        serializer = ProductsSerializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'POST'])
+def get_post_products(request):
+    # get all products
+    if request.method == 'GET':
+        products = Products.objects.all()
+        serializer = ProductsSerializer(products, many=True)
+        return Response(serializer.data)
+    # insert a new record for a product
+    if request.method == 'POST':
+        data = {
+            'productId': request.data.get('productId'),
+            'productName': request.data.get('productName'),
+            'productSKU': request.data.get('productSKU'),
+            'productPrice': int(request.data.get('productPrice')),
+            'productCartDesc': request.data.get('productCartDesc'),
+            'productShortDesc': request.data.get('productShortDesc'),
+            'productLongDesc': request.data.get('productLongDesc'),
+            'productImage': request.data.get('productImage'),
+            'productUpdateDate': bool(request.data.get('productUpdateDate')),
+            'productStock': request.data.get('productStock'),
+            'productUnlimited': bool(request.data.get('productUnlimited')),
+        }
+        serializer = ProductsSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
