@@ -76,17 +76,16 @@ def get_post_products(request):
     # insert a new record for a product
     if request.method == 'POST':
         data = {
-            'productId': request.data.get('productId'),
-            'productName': request.data.get('productName'),
-            'productSKU': request.data.get('productSKU'),
-            'productPrice': int(request.data.get('productPrice')),
-            'productCartDesc': request.data.get('productCartDesc'),
-            'productShortDesc': request.data.get('productShortDesc'),
-            'productLongDesc': request.data.get('productLongDesc'),
-            'productImage': request.data.get('productImage'),
-            'productUpdateDate': bool(request.data.get('productUpdateDate')),
-            'productStock': request.data.get('productStock'),
-            'productUnlimited': bool(request.data.get('productUnlimited')),
+            'name': request.data.get('name'),
+            'sku': request.data.get('sku'),
+            'price': int(request.data.get('price')),
+            'cart_desc': request.data.get('cart_desc'),
+            'short_desc': request.data.get('short_desc'),
+            'long_desc': request.data.get('long_desc'),
+            'image': request.data.get('image'),
+            'update_date': bool(request.data.get('update_date')),
+            'stock': int(request.data.get('stock')),
+            'inlimited': bool(request.data.get('inlimited')),
         }
         serializer = ProductsSerializer(data=data)
         if serializer.is_valid():

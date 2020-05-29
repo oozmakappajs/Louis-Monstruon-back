@@ -14,13 +14,13 @@ class GetAllProductsTest(TestCase):
 
     def setUp(self):
         Products.objects.create(
-            productId=1,productName='Dress', productSKU="Black", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
         Products.objects.create(
-            productId=2,productName='Dress', productSKU="Pink", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
         Products.objects.create(
-            productId=3,productName='Socks', productSKU="Red", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Socks', sku="Red", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
         Products.objects.create(
-            productId=4,productName='T shirt', productSKU="Green", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='T shirt', sku="Green", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
 
     def test_get_all_products(self):
         # get API response
@@ -37,13 +37,13 @@ class GetSingleProductTest(TestCase):
 
     def setUp(self):
         self.dress = Products.objects.create(
-            productId=1,productName='Dress', productSKU="Black", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
         self.dress2 = Products.objects.create(
-            productId=2,productName='Dress', productSKU="Pink", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
         self.socks = Products.objects.create(
-            productId=3,productName='Socks', productSKU="Red", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Socks', sku="Red", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
         self.tshirt = Products.objects.create(
-            productId=4,productName='T shirt', productSKU="Green", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='T shirt', sku="Green", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
 
     def test_get_valid_single_product(self):
         response = client.get(
@@ -64,31 +64,29 @@ class CreateNewProductTest(TestCase):
 
     def setUp(self):
         self.valid_payload = {
-            'productId': '1',
-            'productName': 'Dress',
-            'productSKU': 'Black',
-            'productPrice': 25,
-            'productCartDesc': 'This is the cart description',
-            'productShortDesc': 'This is the short description',
-            'productLongDesc': 'This is the long description',
-            'productImage': 'www.example.com',
-            'productUpdateDate': True,
-            'productStock': 3,
-            'productUnlimited': False,
+            'name': 'Dress',
+            'sku': 'Black',
+            'price': 25,
+            'cart_desc': 'This is the cart description',
+            'short_desc': 'This is the short description',
+            'long_desc': 'This is the long description',
+            'image': 'www.example.com',
+            'update_date': True,
+            'stock': 3,
+            'unlimited': False,
         }
 
         self.invalid_payload = {
-            'productId': '',
-            'productName': '',
-            'productSKU': '',
-            'productPrice': 25,
-            'productCartDesc': 'This is the cart description',
-            'productShortDesc': 'This is the short description',
-            'productLongDesc': 'This is the long description',
-            'productImage': 'www.example.com',
-            'productUpdateDate': True,
-            'productStock': 3,
-            'productUnlimited': False,
+            'name': '',
+            'sku': '',
+            'price': 25,
+            'cart_desc': 'This is the cart description',
+            'short_desc': 'This is the short description',
+            'long_desc': 'This is the long description',
+            'image': 'www.example.com',
+            'update_date': True,
+            'stock': 3,
+            'unlimited': False,
         }
 
     def test_create_valid_product(self):
@@ -107,40 +105,38 @@ class CreateNewProductTest(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    class UpdateSinglePuppyTest(TestCase):
+    class UpdateSingleProductTest(TestCase):
         """ Test module for updating an existing product record """
 
     def setUp(self):
         self.dress = Products.objects.create(
-            productId=1,productName='Dress', productSKU="Black", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5.0, unlimited=False)
         self.dress2 = Products.objects.create(
-            productId=2,productName='Dress', productSKU="Pink", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5.0, unlimited=False)
         self.valid_payload = {
-            'productId': '2',
-            'productName': 'Dress',
-            'productSKU': 'Blue',
-            'productPrice': 30,
-            'productCartDesc': 'This is the cart description',
-            'productShortDesc': 'This is the short description',
-            'productLongDesc': 'This is the long description',
-            'productImage': 'www.example.com',
-            'productUpdateDate': True,
-            'productStock': 3,
-            'productUnlimited': False,
+            'name': 'Dress',
+            'sku': 'Blue',
+            'price': 30,
+            'cart_desc': 'This is the cart description',
+            'short_desc': 'This is the short description',
+            'long_desc': 'This is the long description',
+            'image': 'www.example.com',
+            'update_date': True,
+            'stock': 3,
+            'unlimited': False,
         }
 
         self.invalid_payload = {
-            'productId': '',
-            'productName': '',
-            'productSKU': '',
-            'productPrice': 25,
-            'productCartDesc': 'This is the cart description',
-            'productShortDesc': 'This is the short description',
-            'productLongDesc': 'This is the long description',
-            'productImage': 'www.example.com',
-            'productUpdateDate': True,
-            'productStock': 3,
-            'productUnlimited': False,
+            'name': '',
+            'sku': '',
+            'price': 25,
+            'cart_desc': 'This is the cart description',
+            'short_desc': 'This is the short description',
+            'long_desc': 'This is the long description',
+            'image': 'www.example.com',
+            'update_date': True,
+            'stock': 3,
+            'unlimited': False,
         }
 
     def test_valid_update_product(self):
@@ -164,9 +160,9 @@ class DeleteSinglePuppyTest(TestCase):
 
     def setUp(self):
         self.dress = Products.objects.create(
-            productId=1,productName='Dress', productSKU="Black", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
         self.dress2 = Products.objects.create(
-            productId=2,productName='Dress', productSKU="Pink", productPrice=25, productCartDesc='This is the description', productShortDesc="This is thr short description", productLongDesc="This is the long description", productImage="www.example.com", productUpdateDate= True, productStock=5, productUnlimited=False)
+            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
 
     def test_valid_delete_product(self):
         response = client.delete(

@@ -10,6 +10,6 @@ class Products(models.Model):
     long_desc = models.CharField(max_length=200)
     image = models.URLField(max_length=200)
     update_date = models.DateField(auto_now=True)
-    stock = models.IntegerField
+    stock = models.IntegerField(blank=True, null=True)
     unlimited = models.BooleanField(False)
 
