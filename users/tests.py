@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from .models import Users
 
 
@@ -13,8 +14,9 @@ class UserTest(TestCase):
         }
 
     def test_output(self):
-        output_answer = Users(self.parameters['name'], self.parameters['surname'], self.parameters['password'], self.parameters['address'])
-        self.assertEqual = (output_answer, 'Jose', 'jose123', 'seguro', 'Montevideo 5') 
-        
+        output_answer = Users(self.parameters['name'], self.parameters['surname'], self.parameters['password'],
+                              self.parameters['address'])
+        self.assertEqual = (output_answer, 'Jose', 'jose123', 'seguro', 'Montevideo 5')
+
     def tearDown(self):
-            del(self.parameters)
+        del self.parameters
