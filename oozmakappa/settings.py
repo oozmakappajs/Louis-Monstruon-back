@@ -81,12 +81,12 @@ WSGI_APPLICATION = "oozmakappa.wsgi.application"
 
 DATABASES = {
     'default': {
-            'ENGINE': '',
-            'NAME': '',
-            'USER': '',
-            'PASSWORD': '',
-            'HOST': '',
-            'PORT': '',
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'louis_monstruon',
+            'USER': 'admin',
+            'PASSWORD': 'eAzJGDtiG33JEbDm',
+            'HOST': 'database-1.cfwdfcynd8hm.us-east-1.rds.amazonaws.com',
+            'PORT': '3306',
         }
 }
 

