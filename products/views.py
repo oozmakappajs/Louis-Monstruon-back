@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 from .models import Products
 from .serializers import ProductsSerializer
@@ -14,6 +15,9 @@ from .serializers import ProductsSerializer
 class ProductsViewSet(viewsets.ModelViewSet):
     serializer_class = ProductsSerializer
     queryset = Products.objects.all()
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('name', 'category')
+
 
 
 def allProducts(request):
