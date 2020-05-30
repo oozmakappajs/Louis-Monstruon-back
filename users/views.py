@@ -1,8 +1,7 @@
-from django.shortcuts import render
+from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 
 from .models import Users, Orders, Address, AddressUsers
 from .serializers import UsersSerializer, OrdersSerializer, AddressSerializer, AddressUsersSerializer
@@ -12,17 +11,21 @@ class UsersViewSet(viewsets.ModelViewSet):
     serializer_class = UsersSerializer
     queryset = Users.objects.all()
 
+
 class OrdersViewSet(viewsets.ModelViewSet):
     serializer_class = OrdersSerializer
     queryset = Orders.objects.all()
+
 
 class AddressViewSet(viewsets.ModelViewSet):
     serializer_class = AddressSerializer
     queryset = Address.objects.all()
 
+
 class AddressUserViewSet(viewsets.ModelViewSet):
     serializer_class = AddressUsersSerializer
     queryset = AddressUsers.objects.all()
+
 
 @api_view(['GET', 'DELETE', 'PUT'])
 def get_delete_update_user(request, pk):

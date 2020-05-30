@@ -38,5 +38,3 @@ class Orders(models.Model):
     date = models.DateField(auto_now=True)
     shipped = models.BooleanField(False)
     tracking_number = models.CharField(max_length=15)
-
-

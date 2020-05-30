@@ -1,14 +1,13 @@
-from datetime import datetime
 import json
 
 from django.http import HttpResponse
+from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 
-from .models import Products
-from .serializers import ProductsSerializer
+from .models import Products, Categories
+from .serializers import ProductsSerializer, CategoriesSerializer
 
 
 class ProductsViewSet(viewsets.ModelViewSet):
@@ -92,11 +91,38 @@ def get_post_products(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-    '''def get_post_categories(request):
-        pass
 
-    def get_filter(request):
+
+@api_view(['GET'])
+def get_categories(request):
+    categories = Categories.objects.all()
+    serializer = CategoriesSerializer(categories, many=True)
+
+    response = {
+        'status': 'OK',
+        'data': serializer.data,
+    }
+    return Response(response)
+
+
+@api_view(['GET'])
+def get_products_categories(request, category_id):
+    # get products for category
+
+    data = {}
+    if request.method == 'GET':
+        products = Products.objects.all().filter(subcategory__category=category_id)
+        serializer = ProductsSerializer(products, many=True)
+        data = serializer.data
+
+    response = {
+        'status': 'OK',
+        'data': data,
+        'msg': 'Todo cool'
+    }
+    return Response(response)
+
+    '''def get_filter(request):
         pass
 
     def get_post_cart(request):
