@@ -26,7 +26,7 @@ SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be us
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'oozmakappa-api.herokuapp.com', 'https://louis-monstruon.now.sh/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'oozmakappa-api.herokuapp.com', 'louis-monstruon.now.sh']
 
 # Application definition
 
@@ -47,12 +47,19 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
+]
+CORS_ORIGIN_WHITELIST = [
+    "louis-monstruon.now.sh",
+    "oozmakappa-api.herokuapp.com",
+    "http://localhost:9000",
+    "http://127.0.0.1:9000"
 ]
 
 ROOT_URLCONF = "oozmakappa.urls"
