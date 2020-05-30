@@ -85,7 +85,7 @@ def get_post_products(request):
             'image': request.data.get('image'),
             'update_date': bool(request.data.get('update_date')),
             'stock': int(request.data.get('stock')),
-            'inlimited': bool(request.data.get('inlimited')),
+            'unlimited': bool(request.data.get('unlimited')),
         }
         serializer = ProductsSerializer(data=data)
         if serializer.is_valid():

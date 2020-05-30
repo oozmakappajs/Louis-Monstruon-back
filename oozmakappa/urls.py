@@ -12,7 +12,7 @@ from users.views import UsersViewSet
 from products import views as products_view
 
 router = DefaultRouter()
-#router.register(r'products', ProductsViewSet)
+router.register(r'products', ProductsViewSet)
 router.register(r'users', UsersViewSet)
 
 urlpatterns = router.urls
@@ -24,5 +24,6 @@ urlpatterns += [
     path("admin/", admin.site.urls),
     path('', include('payments.urls')),
     path('', include('products.urls')),
+    path('', include('users.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

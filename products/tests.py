@@ -14,13 +14,13 @@ class GetAllProductsTest(TestCase):
 
     def setUp(self):
         Products.objects.create(
-            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
         Products.objects.create(
-            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
         Products.objects.create(
-            name='Socks', sku="Red", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='Socks', sku="Red", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
         Products.objects.create(
-            name='T shirt', sku="Green", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='T shirt', sku="Green", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
 
     def test_get_all_products(self):
         # get API response
@@ -37,13 +37,13 @@ class GetSingleProductTest(TestCase):
 
     def setUp(self):
         self.dress = Products.objects.create(
-            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
         self.dress2 = Products.objects.create(
-            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
         self.socks = Products.objects.create(
-            name='Socks', sku="Red", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='Socks', sku="Red", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
         self.tshirt = Products.objects.create(
-            name='T shirt', sku="Green", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='T shirt', sku="Green", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
 
     def test_get_valid_single_product(self):
         response = client.get(
@@ -70,22 +70,22 @@ class CreateNewProductTest(TestCase):
             'cart_desc': 'This is the cart description',
             'short_desc': 'This is the short description',
             'long_desc': 'This is the long description',
-            'image': 'www.example.com',
+            'image': 'https://www.gstatic.com/webp/gallery3/1.png',
             'update_date': True,
             'stock': 3,
             'unlimited': False,
         }
 
         self.invalid_payload = {
-            'name': '',
+            'name': 25,
             'sku': '',
-            'price': 25,
+            'price': '',
             'cart_desc': 'This is the cart description',
             'short_desc': 'This is the short description',
             'long_desc': 'This is the long description',
-            'image': 'www.example.com',
-            'update_date': True,
-            'stock': 3,
+            'image': '',
+            'update_date': '',
+            'stock': 3 ,
             'unlimited': False,
         }
 
@@ -110,9 +110,9 @@ class CreateNewProductTest(TestCase):
 
     def setUp(self):
         self.dress = Products.objects.create(
-            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5.0, unlimited=False)
+            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5.0, unlimited=False)
         self.dress2 = Products.objects.create(
-            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5.0, unlimited=False)
+            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5.0, unlimited=False)
         self.valid_payload = {
             'name': 'Dress',
             'sku': 'Blue',
@@ -120,7 +120,7 @@ class CreateNewProductTest(TestCase):
             'cart_desc': 'This is the cart description',
             'short_desc': 'This is the short description',
             'long_desc': 'This is the long description',
-            'image': 'www.example.com',
+            'image': 'https://www.gstatic.com/webp/gallery3/1.png',
             'update_date': True,
             'stock': 3,
             'unlimited': False,
@@ -133,7 +133,7 @@ class CreateNewProductTest(TestCase):
             'cart_desc': 'This is the cart description',
             'short_desc': 'This is the short description',
             'long_desc': 'This is the long description',
-            'image': 'www.example.com',
+            'image': 'https://www.gstatic.com/webp/gallery3/1.png',
             'update_date': True,
             'stock': 3,
             'unlimited': False,
@@ -160,9 +160,9 @@ class DeleteSinglePuppyTest(TestCase):
 
     def setUp(self):
         self.dress = Products.objects.create(
-            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='Dress', sku="Black", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
         self.dress2 = Products.objects.create(
-            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="www.example.com", update_date= True, stock=5, unlimited=False)
+            name='Dress', sku="Pink", price=25, cart_desc='This is the description', short_desc="This is thr short description", long_desc="This is the long description", image="https://www.gstatic.com/webp/gallery3/1.png", update_date= True, stock=5, unlimited=False)
 
     def test_valid_delete_product(self):
         response = client.delete(
