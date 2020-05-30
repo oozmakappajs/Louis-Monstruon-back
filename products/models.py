@@ -13,3 +13,4 @@ class Products(models.Model):
     stock = models.IntegerField(blank=True, null=True)
     unlimited = models.BooleanField(False)
 
+

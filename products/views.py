@@ -93,11 +93,11 @@ def get_post_products(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-    def get_post_categories(request):
+    '''def get_post_categories(request):
         pass
 
     def get_filter(request):
         pass
 
     def get_post_cart(request):
-        pass
+        pass'''

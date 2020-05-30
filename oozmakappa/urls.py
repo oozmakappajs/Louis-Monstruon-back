@@ -7,13 +7,16 @@ admin.autodiscover()
 
 from rest_framework.routers import DefaultRouter
 from products.views import ProductsViewSet
-from users.views import UsersViewSet
+from users.views import UsersViewSet, OrdersViewSet, AddressViewSet, AddressUserViewSet
 
 from products import views as products_view
 
 router = DefaultRouter()
 router.register(r'products', ProductsViewSet)
 router.register(r'users', UsersViewSet)
+router.register(r'orders', OrdersViewSet)
+router.register(r'address', AddressViewSet)
+router.register(r'addressusers', AddressUserViewSet)
 
 urlpatterns = router.urls
 
