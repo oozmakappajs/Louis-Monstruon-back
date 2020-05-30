@@ -2,6 +2,7 @@ import json
 
 from django.http import HttpResponse
 from rest_framework import status
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -13,6 +14,9 @@ from .serializers import ProductsSerializer, CategoriesSerializer
 class ProductsViewSet(viewsets.ModelViewSet):
     serializer_class = ProductsSerializer
     queryset = Products.objects.all()
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('name', 'category')
+
 
 
 def allProducts(request):
