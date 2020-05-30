@@ -1,19 +1,22 @@
-from datetime import datetime
 import json
 
 from django.http import HttpResponse
+from rest_framework import status
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 
-from .models import Products
-from .serializers import ProductsSerializer
+from .models import Products, Categories
+from .serializers import ProductsSerializer, CategoriesSerializer
 
 
 class ProductsViewSet(viewsets.ModelViewSet):
     serializer_class = ProductsSerializer
     queryset = Products.objects.all()
+    filter_backends = (SearchFilter, OrderingFilter)
+    search_fields = ('name', 'category')
+
 
 
 def allProducts(request):
@@ -76,20 +79,55 @@ def get_post_products(request):
     # insert a new record for a product
     if request.method == 'POST':
         data = {
-            'productId': request.data.get('productId'),
-            'productName': request.data.get('productName'),
-            'productSKU': request.data.get('productSKU'),
-            'productPrice': int(request.data.get('productPrice')),
-            'productCartDesc': request.data.get('productCartDesc'),
-            'productShortDesc': request.data.get('productShortDesc'),
-            'productLongDesc': request.data.get('productLongDesc'),
-            'productImage': request.data.get('productImage'),
-            'productUpdateDate': bool(request.data.get('productUpdateDate')),
-            'productStock': request.data.get('productStock'),
-            'productUnlimited': bool(request.data.get('productUnlimited')),
+            'name': request.data.get('name'),
+            'sku': request.data.get('sku'),
+            'price': int(request.data.get('price')),
+            'cart_desc': request.data.get('cart_desc'),
+            'short_desc': request.data.get('short_desc'),
+            'long_desc': request.data.get('long_desc'),
+            'image': request.data.get('image'),
+            'update_date': bool(request.data.get('update_date')),
+            'stock': int(request.data.get('stock')),
+            'unlimited': bool(request.data.get('unlimited')),
         }
         serializer = ProductsSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def get_categories(request):
+    categories = Categories.objects.all()
+    serializer = CategoriesSerializer(categories, many=True)
+
+    response = {
+        'status': 'OK',
+        'data': serializer.data,
+    }
+    return Response(response)
+
+
+@api_view(['GET'])
+def get_products_categories(request, category_id):
+    # get products for category
+
+    data = {}
+    if request.method == 'GET':
+        products = Products.objects.all().filter(subcategory__category=category_id)
+        serializer = ProductsSerializer(products, many=True)
+        data = serializer.data
+
+    response = {
+        'status': 'OK',
+        'data': data,
+        'msg': 'Todo cool'
+    }
+    return Response(response)
+
+    '''def get_filter(request):
+        pass
+
+    def get_post_cart(request):
+        pass'''
